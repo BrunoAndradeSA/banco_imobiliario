@@ -10,4 +10,4 @@ Simulações de comportamento do jogo banco imobiliário escrito em Python
 
 Execução:
 
-# python banco_imobiliario.py
+**_python banco_imobiliario.py_**
