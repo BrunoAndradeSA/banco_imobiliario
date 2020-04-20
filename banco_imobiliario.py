@@ -283,10 +283,7 @@ class Tabuleiro:
 ##############################################################################
 class JogadorImpulsivo(Jogador):
     def analisar_oportunidade_compra(self, propriedade: Propriedade) -> bool:
-        if self.valor_disponivel_saque(propriedade.valor_compra):
-            return propriedade.comprar(self)
-        else:
-            return False
+        return propriedade.comprar(self)
 
 
 ##############################################################################
@@ -296,7 +293,7 @@ class JogadorImpulsivo(Jogador):
 ##############################################################################
 class JogadorExigente(Jogador):
     def analisar_oportunidade_compra(self, propriedade: Propriedade) -> bool:
-        if self.valor_disponivel_saque(propriedade.valor_compra) and propriedade.valor_aluguel > 50:
+        if propriedade.valor_aluguel > 50:
             return propriedade.comprar(self)
         else:
             return False
@@ -309,7 +306,7 @@ class JogadorExigente(Jogador):
 ##############################################################################
 class JogadorCauteloso(Jogador):
     def analisar_oportunidade_compra(self, propriedade: Propriedade) -> bool:
-        if self.valor_disponivel_saque(propriedade.valor_compra) and (self.saldo - propriedade.valor_compra) >= 80:
+        if (self.saldo - propriedade.valor_compra) >= 80:
             return propriedade.comprar(self)
         else:
             return False
@@ -322,7 +319,7 @@ class JogadorCauteloso(Jogador):
 ##############################################################################
 class JogadorAleatorio(Jogador):
     def analisar_oportunidade_compra(self, propriedade: Propriedade) -> bool:
-        if self.valor_disponivel_saque(propriedade.valor_compra) and random.choice([True, False]):
+        if random.choice([True, False]):
             return propriedade.comprar(self)
         else:
             return False
@@ -450,9 +447,9 @@ def iniciar_jogo():
         print(
             """
             ------------------------------------------------------------------------------------------------
-            | ORDEM DE INICIO DOS JOGADORE                                                                 |
+            | ORDEM DE INICIO DOS JOGADORES                                                                 |
             ------------------------------------------------------------------------------------------------
-            """.format(nro_simulacao)
+            """
         )
 
         for jogador in tabuleiro.jogadores:
